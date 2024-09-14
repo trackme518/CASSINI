@@ -23,6 +23,10 @@ from sklearn.metrics import classification_report
 from catboost import Pool, CatBoostRegressor
 #------------------------------------------------
 
+# save the model for later
+import pickle
+
+
 import os
 file_path = os.path.dirname(os.path.realpath(__file__))
 file_path = os.path.join(file_path, 'dataset')
@@ -31,18 +35,31 @@ print(file_path)
 
 #--------------------------------------------
 ## Read data
-pd.set_option('display.max.columns', 100)
+# pd.set_option('display.max.columns', 100)
 
 ## set the period of forcast
 start_mth = datetime.datetime(2023, 7, 31)
 end_mth = datetime.datetime(2024, 7, 31)
 
 ## Read Data
-dataset = pd.read_csv(file_path+'merged_data_big_v3.csv', sep=',', encoding='utf-8')
+dataset = pd.read_csv(file_path+'merged_data_big.csv', sep=',', encoding='utf-8')
 #dataset.columns = dataset.columns.str.lower()
 dataset['date'] = pd.to_datetime(dataset['date'], format='ISO8601')
 #dataset['date'] = pd.to_datetime(dataset['date'], format='%d/%m/%Y')
 #dataset['electricity_daily_average_CZ'] = dataset['electricity_daily_average_CZ'].astype(float)
+
+
+#--------------------------------------------
+# create a copy with a single value outside training data to verify the model later
+## set the period for the forcast
+start_mth_test = datetime.datetime(2023, 5, 1)
+end_mth_test = datetime.datetime(2023, 5, 30)
+## Filter dataset within start and end month
+dataset_test = dataset[( dataset['date']>=start_mth_test) & (dataset['date'] <= end_mth_test)]
+dataset_test_truth = dataset_test['price_mwh_eur_DAM']
+
+dataset_test = dataset.drop(columns=['date', 'price_mwh_eur_DAM'])
+#--------------------------------------------
 
 ## Filter dataset within start and end month
 dataset = dataset[( dataset['date']>=start_mth) & (dataset['date'] <= end_mth)]
@@ -69,8 +86,8 @@ plt.show()
 
 #dataset.drop(columns=['precipitation_DE', 'precipitation_HU', 'precipitation_RO', 'precipitation_SK', 'electricity_daily_average_CZ', 'wind_speed_CZ','wind_speed_DE','wind_speed_HU','wind_speed_RO','wind_speed_SK'])
 #dataset = dataset.drop(columns=['electricity_daily_average_CZ'])
-#dataset = dataset.drop(columns=['time_series','river_hydropower_AT','river_hydropower_CH','river_hydropower_DE','river_hydropower_ES','river_hydropower_FI','river_hydropower_FR','river_hydropower_IT','river_hydropower_NO','river_hydropower_PT','river_hydropower_RO','river_hydropower_SK'])
-dataset = dataset.drop(columns=['time_series'])
+#dataset = dataset.drop(columns=['river_hydropower_AT','river_hydropower_CH','river_hydropower_DE','river_hydropower_ES','river_hydropower_FI','river_hydropower_FR','river_hydropower_IT','river_hydropower_NO','river_hydropower_PT','river_hydropower_RO','river_hydropower_SK','time_series'])
+#dataset = dataset.drop(columns=['time_series'])
 X = dataset.drop(columns=['date','price_mwh_eur_DAM']) 
 y = dataset['price_mwh_eur_DAM']
 
@@ -89,11 +106,14 @@ models = {
 }
 """
 
-#model = XGBRegressor(random_state = 42)
+# learn more https://xgboost.readthedocs.io/en/stable/parameter.html
+model = XGBRegressor(random_state = 42)
+#model = XGBRegressor(random_state = 42, min_child_weight=200000, gamma=1, max_depth=7, tree_method='auto' )
+#base_score=65,
 
 # specify the training parameters
 #model = CatBoostRegressor(iterations=15,depth=10,learning_rate=1,loss_function='RMSE')
-model = RandomForestRegressor(random_state = 42)
+#model = RandomForestRegressor(random_state = 42)
 #model = LinearRegression()
 
 # Standardize features by removing the mean and scaling to unit variance
@@ -103,11 +123,24 @@ X_test_scaled = scaler.transform(X_test)
 
 
 ## Predict and Evaluation
-model.fit(X_train_scaled, y_train)
-y_pred = model.predict(X_test_scaled)
+#scaler caused the same output :-( don't know why yet 
+#model.fit(X_train_scaled, y_train)
+#y_pred = model.predict(X_test_scaled)
+
+
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
 mse = mean_squared_error(y_test, y_pred)
 mape = mean_absolute_percentage_error(y_test, y_pred) * 100
 r_squared = r2_score(y_test, y_pred)
+
+# save the model to disk
+filename = 'finalized_model.sav'
+file_path_model = os.path.dirname(os.path.realpath(__file__))
+file_path_model = os.path.join(file_path_model, filename)
+print(file_path_model)
+
+pickle.dump(model, open(file_path_model, 'wb'))
 
 ## print model accuracy
 print(f"Mean Squared Error = {mse}")
@@ -124,3 +157,18 @@ p2 = min(min(y_pred), min(y_test))
 plt.plot([p1, p2], [p1, p2], color = 'r', linestyle = '-', lw=2)
 plt.grid(True)
 plt.show()
+
+
+ynew = model.predict(dataset_test)
+# output [65.217354] which should be EUR/MWh
+# show the inputs and predicted probabilities
+for idx, x in enumerate(dataset_test_truth):
+    #for i in range(len(dataset_test_truth)):
+    print("X=%s, Predicted=%s" % (x, ynew[idx]))
+ 
+# show the inputs and predicted outputs
+ 
+
+
+
+
