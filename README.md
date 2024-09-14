@@ -26,10 +26,12 @@ R-squared = 0.82
 
 ## VertexAI Google API
 I also did experiment with Google VertexAI for training deep learning model in the cloud. It worked with smaller dataset and failed with larger with error:
-"Too few rows were found when attempting to create time series. There must be at least 1000 rows, but only 367 with valid data were found." using Time series Dense Encoder (TiDE). With AutoML 
+"Too few rows were found when attempting to create time series. There must be at least 1000 rows, but only 367 with valid data were found." using Time series Dense Encoder (TiDE), same error given with AutoML. I could enrich the dataset to get 1000 rows but the problem is that would mean going pre 2022 and results would be skewed due to war in Ukraine. Alternative is to provide hourly prices - something that could be done to even help predict interday trading.
 
 ## Future research 
-I would add sentiment analysis on the bloomberg or yahoo finance articles into the dataset to see if that can help with predicting prices. 
+* I would add sentiment analysis on the bloomberg or yahoo finance articles into the dataset to see if that can help with predicting prices. 
+    * https://www.ote-cr.cz/en/short-term-markets/market-coupling-day-ahead-market
+* Adding hourly price changes and hourly wetaher data to enable interday trading.
 
 ## Other models
 
