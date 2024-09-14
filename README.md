@@ -1,4 +1,4 @@
-# CASSINI
+# CASSINI - Planet Watt AI 
 CASSINI Hackthaton challange #2 - sustainable living.
 
 ## Goal
@@ -23,6 +23,12 @@ The final result with courated dataset using XG Boost Regressor model trained on
 Mean Squared Error = 143.12066576374997
 Mean Absolute Percentage Error =  14.69%
 R-squared = 0.82
+
+## User base / clients
+Electricity traders on stock exchange and powerplants. 
+
+## Conlusion
+PlanetWattAI is a proof of concept and a stepping stone for building a prediciton service for interday and day-ahead electricity on stock exchange in central europe. 
 
 ## VertexAI Google API
 I also did experiment with Google VertexAI for training deep learning model in the cloud. It worked with smaller dataset and failed with larger with error:
