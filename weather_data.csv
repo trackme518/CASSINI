@@ -1,0 +1,6 @@
+date,min_temp,max_temp,ev_transpiration,solar,max_humid,min_humid,wind,solar,station_name
+01/01/2015,17.7,30,10,32.95,30,9,3.62,32.95,broken_hill_airport
+02/01/2015,21.5,23,11.7,33.37,23,7,4.33,33.37,broken_hill_airport
+03/01/2015,27.9,57,13.7,30.63,57,13,7.5,30.63,broken_hill_airport
+04/01/2015,19.2,92,5.2,13.59,92,41,5.21,13.59,broken_hill_airport
+05/01/2015,19.4,79,9.5,30.63,79,22,4.85,30.63,broken_hill_airport
