@@ -10,7 +10,7 @@ from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error, r2_score
 
-
+#------------------------------------------------
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
@@ -18,7 +18,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
-
+#------------------------------------------------
+#try Catboost - should ouperform XGBoost
+from catboost import Pool, CatBoostRegressor
+#------------------------------------------------
 
 import os
 file_path = os.path.dirname(os.path.realpath(__file__))
@@ -86,6 +89,9 @@ models = {
 """
 
 model = XGBRegressor(random_state = 42)
+
+# specify the training parameters
+#model = CatBoostRegressor(iterations=15,depth=10,learning_rate=1,loss_function='RMSE')
 #model = RandomForestRegressor(random_state = 42)
 #model = LinearRegression()
 

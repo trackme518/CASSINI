@@ -24,7 +24,33 @@ Mean Squared Error = 143.12066576374997
 Mean Absolute Percentage Error =  14.69%
 R-squared = 0.82
 
-## Observations
+## VertexAI Google API
+I also did experiment with Google VertexAI for training deep learning model in the cloud. It worked with smaller dataset and failed with larger with error:
+"Too few rows were found when attempting to create time series. There must be at least 1000 rows, but only 367 with valid data were found." using Time series Dense Encoder (TiDE). With AutoML 
+
+## Future research 
+I would add sentiment analysis on the bloomberg or yahoo finance articles into the dataset to see if that can help with predicting prices. 
+
+## Other models
+
+* CatBoost Reggressor (iterations=15,depth=10,learning_rate=1,loss_function='RMSE')
+    * Mean Squared Error = 199.24074443265312
+    * Mean Absolute Percentage Error =  15.43%
+    * R-squared = 0.75
+* RandomForest
+    * Mean Squared Error = 179.65316662499995
+    * Mean Absolute Percentage Error =  17.56%
+    * R-squared = 0.78
+* Linear Regression
+    * Mean Squared Error = 226.9524289249845
+    * Mean Absolute Percentage Error =  19.21%
+    * R-squared = 0.72
+* XGBRegressor 
+    * Mean Squared Error = 143.12066576374997
+    * Mean Absolute Percentage Error =  14.69%
+    * R-squared = 0.82
+
+## The Journey & Observations
 We can fairly accuretly predict electricity demand with the XGBoost Regressor - improved by scaler:
 Mean Squared Error = 37873863.09106111
 Mean Absolute Percentage Error =  0.16%
@@ -101,10 +127,3 @@ LSTM2021 mean error:  12.62
 CNN-LSTMSep2021 mean error: 10.03
 
 Considering these are deep learning models the value 15% mean error for "simple" XGBRegressor seems like a good result.
-
-## VertexAI Google API
-I also did experiment with Google VertexAI for training deep learning model in the cloud. It worked with smaller dataset and failed with larger with error:
-"Too few rows were found when attempting to create time series. There must be at least 1000 rows, but only 367 with valid data were found." using Time series Dense Encoder (TiDE). With AutoML 
-
-## Future research 
-I would add sentiment analysis on the bloomberg or yahoo finance articles into the dataset to see if that can help with predicting prices. 
