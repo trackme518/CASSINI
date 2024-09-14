@@ -66,6 +66,7 @@ plt.show()
 
 #dataset.drop(columns=['precipitation_DE', 'precipitation_HU', 'precipitation_RO', 'precipitation_SK', 'electricity_daily_average_CZ', 'wind_speed_CZ','wind_speed_DE','wind_speed_HU','wind_speed_RO','wind_speed_SK'])
 #dataset = dataset.drop(columns=['electricity_daily_average_CZ'])
+dataset = dataset.drop(columns=['time_series','river_hydropower_AT','river_hydropower_CH','river_hydropower_DE','river_hydropower_ES','river_hydropower_FI','river_hydropower_FR','river_hydropower_IT','river_hydropower_NO','river_hydropower_PT','river_hydropower_RO','river_hydropower_SK'])
 X = dataset.drop(columns=['date','price_mwh_eur_DAM']) 
 y = dataset['price_mwh_eur_DAM']
 

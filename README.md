@@ -15,6 +15,15 @@ Predict electricity prices based on weather and other data from sattelites using
 * Merged data
     * https://cds-beta.climate.copernicus.eu/datasets/sis-energy-derived-projections?tab=download
 
+## Result with XG Boost Regressor
+![Graph showing predictions vs real data of XG Boost Regressor model trained on created dataset](dataset/XGBoostRegressorResult.png)
+
+The final result with courated dataset using XG Boost Regressor model trained on local machine near realtime.
+
+Mean Squared Error = 143.12066576374997
+Mean Absolute Percentage Error =  14.69%
+R-squared = 0.82
+
 ## Observations
 We can fairly accuretly predict electricity demand with the XGBoost Regressor - improved by scaler:
 Mean Squared Error = 37873863.09106111
@@ -85,5 +94,16 @@ Here we are seeing diminishing returns when adding more data.
 
 "Regarding the overall forecasting results, one has to acknowledge that the neural network approaches outperformed the time series models in seven out of twelve prediction samples and the LSTM had the most satisfactory performance metrics on average. Nevertheless, while the LSTM showed the best forecasting results in the majority of prediction samples, the two-stage VAR turned out to provide the second-best EPF, surpassing the CNN-LSTM."
 
+* https://www.sciencedirect.com/science/article/abs/pii/S037877962400018X
+
+SARIMAX2021 mean error: 11.77
+LSTM2021 mean error:  12.62
+CNN-LSTMSep2021 mean error: 10.03
+
+Considering these are deep learning models the value 15% mean error for "simple" XGBRegressor seems like a good result.
+
 ## VertexAI Google API
 I also did experiment with Google VertexAI for training deep learning model in the cloud. 
+
+## Future research 
+I would add sentiment analysis on the bloomberg or yahoo finance articles into the dataset to see if that can help with predicting prices. 
