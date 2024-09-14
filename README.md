@@ -5,7 +5,6 @@ CASSINI Hackthaton challange #2 - sustainable living.
 Predict electricity prices based on weather and other data from sattelites using machine learning AI model.
 
 ## Data sources
-
 * Solar radiation
     * https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-solar-radiation-timeseries?tab=form
     * Altitutde -999., universal time, 50.74424, 9.84271 - Germany, 49.94270, 15.11549 - Czechia
@@ -14,6 +13,8 @@ Predict electricity prices based on weather and other data from sattelites using
     * 1/1/2019-14/9/2024 daily averages
 * Merged data
     * https://cds-beta.climate.copernicus.eu/datasets/sis-energy-derived-projections?tab=download
+
+In the end we are using dataset "merged_data_big.csv" that includes all european countries and their relvant data such as electricity demand (could be predicted with previous regression on weather data or use kopecnik premade projections), hydropower power output, air temperature, wind speed, irradiance, wind power onshore, 
 
 ## Result with XG Boost Regressor
 ![Graph showing predictions vs real data of XG Boost Regressor model trained on created dataset](dataset/XGBoostRegressorResult.png)
@@ -29,6 +30,9 @@ Electricity traders on stock exchange and powerplants.
 
 ## Conlusion
 PlanetWattAI is a proof of concept and a stepping stone for building a prediciton service for interday and day-ahead electricity on stock exchange in central europe. 
+
+## Technical documentation
+"dataprep.py" is the main script that uses "merged_data_big.csv" as a dataset to train. It will train itself and save the finalized model "finalized_model.sav" in the same folder. This "finalized_model.sav" can be then loaded on demand with Pickle serialization - I am demonstrating using saved model in file "use_model.py". There are comments in the main train file and then a lot of unused datasets I have been experimenting with in dataset folder. "time_series" parameter in the dataset for used for Google VertexAI and is not relevant otherwise. Parameter tuning did not done much for me with this dataset. Using scaler resulted in under/over fitting and producing same result every time so I just left the data as they are.  
 
 ## VertexAI Google API
 I also did experiment with Google VertexAI for training deep learning model in the cloud. It worked with smaller dataset and failed with larger with error:
