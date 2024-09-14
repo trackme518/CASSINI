@@ -2,7 +2,7 @@
 CASSINI Hackthaton challange #2 - sustainable living.
 
 ## Goal
-Predict electricity prices based on weather and other data from sattelites using machine learning AI model.
+We predict electricity prices based on weather and other data from Copernicus satellites using machine learning AI model. For day-ahead electricity stock traders and power-plants supervisors. 
 
 ## Data sources
 * Solar radiation
