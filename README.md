@@ -32,6 +32,8 @@ I also did experiment with Google VertexAI for training deep learning model in t
 * I would add sentiment analysis on the bloomberg or yahoo finance articles into the dataset to see if that can help with predicting prices. 
     * https://www.ote-cr.cz/en/short-term-markets/market-coupling-day-ahead-market
 * Adding hourly price changes and hourly wetaher data to enable interday trading.
+* Use Vector AutoRegressive (VAR) - try to interlink the electricity demand with electricity price - each will depand on other weather data provided by Kopernik weather data. 
+    * https://www.analyticsvidhya.com/blog/2021/08/vector-autoregressive-model-in-python/
 
 ## Other models
 
@@ -144,3 +146,6 @@ LSTM2021 mean error:  12.62
 CNN-LSTMSep2021 mean error: 10.03
 
 Considering these are deep learning models the value 15% mean error for "simple" XGBRegressor seems like a good result.
+
+* https://www.cloudskillsboost.google/course_templates/1080
+Properly evaluate deep learning model.

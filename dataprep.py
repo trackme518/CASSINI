@@ -38,7 +38,7 @@ start_mth = datetime.datetime(2023, 7, 31)
 end_mth = datetime.datetime(2024, 7, 31)
 
 ## Read Data
-dataset = pd.read_csv(file_path+'merged_data_big.csv', sep=',', encoding='utf-8')
+dataset = pd.read_csv(file_path+'merged_data_big_v3.csv', sep=',', encoding='utf-8')
 #dataset.columns = dataset.columns.str.lower()
 dataset['date'] = pd.to_datetime(dataset['date'], format='ISO8601')
 #dataset['date'] = pd.to_datetime(dataset['date'], format='%d/%m/%Y')
@@ -62,14 +62,15 @@ plt.xticks(fontsize=8)
 plt.yticks(fontsize=8)
 plt.title('Correlation Heatmap')
 plt.show()
-
 """
+
 #--------------------------------------------
 ## Split data into feature and target variable
 
 #dataset.drop(columns=['precipitation_DE', 'precipitation_HU', 'precipitation_RO', 'precipitation_SK', 'electricity_daily_average_CZ', 'wind_speed_CZ','wind_speed_DE','wind_speed_HU','wind_speed_RO','wind_speed_SK'])
 #dataset = dataset.drop(columns=['electricity_daily_average_CZ'])
-dataset = dataset.drop(columns=['time_series','river_hydropower_AT','river_hydropower_CH','river_hydropower_DE','river_hydropower_ES','river_hydropower_FI','river_hydropower_FR','river_hydropower_IT','river_hydropower_NO','river_hydropower_PT','river_hydropower_RO','river_hydropower_SK'])
+#dataset = dataset.drop(columns=['time_series','river_hydropower_AT','river_hydropower_CH','river_hydropower_DE','river_hydropower_ES','river_hydropower_FI','river_hydropower_FR','river_hydropower_IT','river_hydropower_NO','river_hydropower_PT','river_hydropower_RO','river_hydropower_SK'])
+dataset = dataset.drop(columns=['time_series'])
 X = dataset.drop(columns=['date','price_mwh_eur_DAM']) 
 y = dataset['price_mwh_eur_DAM']
 
@@ -88,11 +89,11 @@ models = {
 }
 """
 
-model = XGBRegressor(random_state = 42)
+#model = XGBRegressor(random_state = 42)
 
 # specify the training parameters
 #model = CatBoostRegressor(iterations=15,depth=10,learning_rate=1,loss_function='RMSE')
-#model = RandomForestRegressor(random_state = 42)
+model = RandomForestRegressor(random_state = 42)
 #model = LinearRegression()
 
 # Standardize features by removing the mean and scaling to unit variance
