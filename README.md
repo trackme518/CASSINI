@@ -103,7 +103,8 @@ CNN-LSTMSep2021 mean error: 10.03
 Considering these are deep learning models the value 15% mean error for "simple" XGBRegressor seems like a good result.
 
 ## VertexAI Google API
-I also did experiment with Google VertexAI for training deep learning model in the cloud. 
+I also did experiment with Google VertexAI for training deep learning model in the cloud. It worked with smaller dataset and failed with larger with error:
+"Too few rows were found when attempting to create time series. There must be at least 1000 rows, but only 367 with valid data were found." using Time series Dense Encoder (TiDE). With AutoML 
 
 ## Future research 
 I would add sentiment analysis on the bloomberg or yahoo finance articles into the dataset to see if that can help with predicting prices. 
