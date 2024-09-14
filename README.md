@@ -115,6 +115,21 @@ R-squared = 0.82
 
 Here we are seeing diminishing returns when adding more data.
 
+## Team
+* Vojtech Leischner
+    * PhD at CVUT FEL - computer graphics department
+    * developer
+    * computer vision, motion analysis, spatial audio, VR, AI
+    * FAMU Audiovisual studies graduate
+* Pavel Husa
+    * PhD at CVUT FEL - computer graphics department
+    * programmer
+    * jazz musician, spatial audio, EEG
+    * IT computer science graduate
+* Vojtech Salek
+    * 3D graphic designer, modeller and dataset preparation artist
+    * UMPRUM graduate, ceramics and porcelain
+
 ## Related resources
 * Forecasting day-ahead electricity prices: A comparison of time series and neural network models taking external regressors into account https://www.sciencedirect.com/science/article/abs/pii/S0140988321005879
 
