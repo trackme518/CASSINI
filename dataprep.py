@@ -35,9 +35,10 @@ start_mth = datetime.datetime(2023, 7, 31)
 end_mth = datetime.datetime(2024, 7, 31)
 
 ## Read Data
-dataset = pd.read_csv(file_path+'merged_data_selection3.csv', sep=',', encoding='utf-8')
+dataset = pd.read_csv(file_path+'merged_data_big.csv', sep=',', encoding='utf-8')
 #dataset.columns = dataset.columns.str.lower()
-dataset['date'] = pd.to_datetime(dataset['date'], format='%d/%m/%Y')
+dataset['date'] = pd.to_datetime(dataset['date'], format='ISO8601')
+#dataset['date'] = pd.to_datetime(dataset['date'], format='%d/%m/%Y')
 #dataset['electricity_daily_average_CZ'] = dataset['electricity_daily_average_CZ'].astype(float)
 
 ## Filter dataset within start and end month
@@ -46,7 +47,7 @@ dataset = dataset[( dataset['date']>=start_mth) & (dataset['date'] <= end_mth)]
 print(dataset.head())
 
 #--------------------------------------------
-#"""
+"""
 ## correlation heat map
 merge_wo_date = dataset.drop(columns='date')
 corr_matrix = merge_wo_date.corr()
@@ -59,7 +60,7 @@ plt.yticks(fontsize=8)
 plt.title('Correlation Heatmap')
 plt.show()
 
-#"""
+"""
 #--------------------------------------------
 ## Split data into feature and target variable
 

@@ -53,7 +53,37 @@ Mean Squared Error = 323.5808738722185
 Mean Absolute Percentage Error =  21.38%
 R-squared = 0.60
 
+Finally we get back to our dataset and settled with the results:
+Mean Squared Error = 344.9708446309555
+Mean Absolute Percentage Error =  19.79%
+R-squared = 0.58
 
+Can be certainly improved. Let's add more data - including all the EU states:
 
+with wind on shore power data:
+[5 rows x 137 columns]
+Mean Squared Error = 189.01761067004315
+Mean Absolute Percentage Error =  16.87%
+R-squared = 0.77
 
+hydropower reservoir added:
+[5 rows x 148 columns]
+Mean Squared Error = 143.12066576374997
+Mean Absolute Percentage Error =  14.69%
+R-squared = 0.82
 
+hydropower run of a river added:
+[5 rows x 159 columns]
+Mean Squared Error = 143.12012356454863
+Mean Absolute Percentage Error =  15.09%
+R-squared = 0.82
+
+Here we are seeing diminishing returns when adding more data.
+
+## Related resources
+* Forecasting day-ahead electricity prices: A comparison of time series and neural network models taking external regressors into account https://www.sciencedirect.com/science/article/abs/pii/S0140988321005879
+
+"Regarding the overall forecasting results, one has to acknowledge that the neural network approaches outperformed the time series models in seven out of twelve prediction samples and the LSTM had the most satisfactory performance metrics on average. Nevertheless, while the LSTM showed the best forecasting results in the majority of prediction samples, the two-stage VAR turned out to provide the second-best EPF, surpassing the CNN-LSTM."
+
+## VertexAI Google API
+I also did experiment with Google VertexAI for training deep learning model in the cloud. 
